@@ -1,0 +1,3 @@
+[submodule "p2pspider"]
+	path = p2pspider
+	url = https://github.com/fanpei91/p2pspider.git
