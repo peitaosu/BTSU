@@ -1,0 +1,28 @@
+<html>
+
+<head>
+	<title>BTSU Torrents</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
+</head>
+
+<body>
+	{% include "header.html" %}
+	<table class="dataintable">
+		<tr>
+			<td>Name</td>
+			<td>Information</td>
+			<td>Magnet</td>
+		</tr>
+		{% for tor in query_result %}
+		<tr>
+			<td>{{ tor.1 }}</td>
+			<td><a href="/tor?hash={{ tor.0 }}">Information</a></td>
+			<td><a href="{{ tor.2 }}">Magnet</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+
+</html>

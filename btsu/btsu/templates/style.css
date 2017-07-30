@@ -1,0 +1,113 @@
+body {
+    width: 98%;
+    height: 100%;
+    font-family: "Roboto", Corbel, Avenir, "Lucida Grande", "Lucida Sans", sans-serif;
+}
+
+h1 a {
+    color: inherit;
+}
+
+h1 a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+}
+
+table.dataintable {
+    margin-top:15px;
+    border-collapse:collapse;
+    border:1px solid #aaa;
+    width:100%;
+}
+
+table.dataintable th {
+    vertical-align:baseline;
+    padding:5px 15px 5px 6px;
+    background-color:#3F3F3F;
+    border:1px solid #3F3F3F;
+    text-align:left;
+    color:#fff;
+}
+
+table.dataintable td {
+    vertical-align:text-top;
+    padding:6px 15px 6px 6px;
+    border:1px solid #aaa;
+}
+
+table.dataintable tr:first-child {
+    background-color:#DDDDDD;
+}
+
+table.dataintable tr:nth-child(odd) {
+    background-color:#F5F5F5;
+}
+
+table.dataintable tr:nth-child(even) {
+    background-color:#fff;
+}
+
+table.dataintable pre {
+    width:auto;
+    margin:0;
+    padding:0;
+    border:0;
+    background-color:transparent;
+}
+
+table.dataintable p {
+    margin:0 0 2px 0;
+}
+
+div#maincontent table.dataintable ul, div#maincontent table.dataintable li {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+
+table.dataintable td em {
+    color:#0000ff;
+    font-weight:normal;
+}
+    
+table.dataintable .table_value {
+    color:#0F93D2;
+}
+
+.no_wrap {
+    white-space:nowrap;
+}
+
+div#maincontent table.dataintable ul.listintable {
+    margin:20px;
+    padding:0;
+}
+
+div#maincontent table.dataintable ul.listintable li {
+    list-style-type:disc;
+}
+
+tr.notsupported {
+    color:#999999;
+}
+
+#search {
+    float: left;
+    margin-top: 12px;
+    width: 100%;
+}
+
+#search input {
+    font-size: 18px;
+    padding: 6px;
+}
+
+#search input[type=submit] {
+    border: none;
+    height: 36px;
+    width: 120px;
+    font-size: 18px;
+}
+
+#total {
+    font-size: 24px;
+}

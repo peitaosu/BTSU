@@ -1,0 +1,21 @@
+<html>
+
+<head>
+	<title>BTSU Torrents</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
+</head>
+
+<body>
+	{% include "header.html" %}
+	<table class="dataintable">
+		{% for i in list %}
+		<tr>
+			<td><a href="/list?q={{ i }}">{{ i }}</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+
+</html>
