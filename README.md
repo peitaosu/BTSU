@@ -11,7 +11,7 @@ Online Demo: [BTSU Torrents](http://128.199.136.19:1234/)
 1. Install Node.js
 
     ```
-    sudo apt-get install nodejs nodejs-legacy npm -f
+    sudo apt-get install nodejs nodejs-legacy npm -y
     ```
 
 2. Install dependent packages
@@ -36,7 +36,7 @@ All torrent files which get from DHT Network will be saved in `p2pspider/torrent
 1. Install transmission
 
     ```
-    sudo apt-get install transmission-cli -f
+    sudo apt-get install transmission-cli -y
     ```
 
 2. Parse torrents and save to database
@@ -59,5 +59,6 @@ python btsu/btsu/manage.py runserver 0.0.0.0:1234
 
 ## Step4: Keep BTSU Running
 
-```keep_running.sh``` is a script which can keep the BTSU running and restart it when the server done.
+```keep_running.sh``` is a script which can keep the BTSU running and restart it when the server down.
+
 Please update the `{your_code_path}` inside before you use it.
