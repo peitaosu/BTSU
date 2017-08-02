@@ -62,3 +62,11 @@ python btsu/btsu/manage.py runserver 0.0.0.0:1234
 ```keep_running.sh``` is a script which can keep the BTSU running and restart it when the server down.
 
 Please update the `{your_code_path}` inside before you use it.
+
+## Step5: Watch New Torrent and Update Database
+
+```fs_watchdog.py``` is a script which can watch torrents folder and update database while get new torrent.
+
+```
+> python fs_watchdog.py <torrent_folder> <database>
+```
