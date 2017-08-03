@@ -1,5 +1,7 @@
 # BTSU
 
+[![GitHub license](https://img.shields.io/badge/license-WTFPL-blue.svg)](https://raw.githubusercontent.com/peitaosu/BTSU/master/LICENSE)
+
 ## What is BTSU ?
 
 BTSU is a torrent website project, powered by [p2pspider](https://github.com/fanpei91/p2pspider.git) and django.
