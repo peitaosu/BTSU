@@ -51,9 +51,15 @@ All torrent files which get from DHT Network will be saved in `p2pspider/torrent
 
 ## Step3: Setup your BTSU
 
-BTSU is a django project, please update the `{your_code_path}` in `btsu/btsu/view.py` before you run the server.
+BTSU is a django project, please install Django and update the `{your_code_path}` in `btsu/btsu/view.py` before you run the server.
 
 ```
+pip install Django
+
+# or install from requirements.txt
+
+pip install -r requirements.txt
+
 # python {your_code_path}/btsu/manage.py runserver 0.0.0.0:{your_port}
 
 python btsu/btsu/manage.py runserver 0.0.0.0:1234
@@ -67,8 +73,16 @@ Please update the `{your_code_path}` inside before you use it.
 
 ## Step5: Watch New Torrent and Update Database
 
-```fs_watchdog.py``` is a script which can watch torrents folder and update database while get new torrent.
+```fs_watchdog.py``` is a script which can watch torrents folder and update database while get new torrent. You need to install watchdog before use it.
 
 ```
-> python fs_watchdog.py <torrent_folder> <database>
+pip install watchdog
+
+# or install from requirements.txt
+
+pip install -r requirements.txt
+
+# then
+
+python fs_watchdog.py <torrent_folder> <database>
 ```
