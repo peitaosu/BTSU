@@ -48,7 +48,7 @@ for tor_file in os.listdir(tor_path):
         tor_name = get_name(tor_file_path)
         tor_magnet = get_magnet(tor_file_path)
         tor_info = get_info(tor_file_path)
-        c.execute('''INSERT INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
+        c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
                   (tor_hash, tor_name, tor_magnet, tor_info))
 conn.commit()
 conn.close()
