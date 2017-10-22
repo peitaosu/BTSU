@@ -45,8 +45,10 @@ for tor_file in os.listdir(tor_path):
     else:
         tor_file_path = os.path.join(tor_path, tor_file)
         tor_hash = tor_file.replace('.torrent', '')
-        tor_name = get_name(tor_file_path)
         tor_magnet = get_magnet(tor_file_path)
+        if not tor_magnet.startswith('magnet'):
+            continue
+        tor_name = get_name(tor_file_path)
         tor_info = get_info(tor_file_path)
         c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
                   (tor_hash, tor_name, tor_magnet, tor_info))
