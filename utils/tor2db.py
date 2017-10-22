@@ -38,7 +38,7 @@ c = conn.cursor()
 c.execute('''CREATE TABLE if not exists torrent (hash, name, magnet, info)''')
 conn.commit()
 for tor_file in os.listdir(tor_path):
-    if tor_file.endswith('.db'):
+    if not tor_file.endswith('.torrent'):
         continue
     if tor_hash_start and not tor_file.startswith(tor_hash_start):
         continue
