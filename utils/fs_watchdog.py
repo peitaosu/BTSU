@@ -38,14 +38,11 @@ class TorHandler(FileSystemEventHandler):
         conn = sqlite3.connect(db_path)
         conn.text_factory = str
         c = conn.cursor()
-        c.execute('SELECT * FROM torrent WHERE hash LIKE "' + new_tor_hash + '"')
-        if len(c.fetchall()) == 0:
-            print "Torrent: " + event.src_path + " not in db."
-            new_tor_name = get_name(event.src_path)
-            new_tor_magnet = get_magnet(event.src_path)
-            new_tor_info = get_info(event.src_path)
-            c.execute('''INSERT INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
-                      (new_tor_hash, new_tor_name, new_tor_magnet, new_tor_info))
+        new_tor_name = get_name(event.src_path)
+        new_tor_magnet = get_magnet(event.src_path)
+        new_tor_info = get_info(event.src_path)
+        c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
+                    (new_tor_hash, new_tor_name, new_tor_magnet, new_tor_info))
         conn.commit()
 
 
