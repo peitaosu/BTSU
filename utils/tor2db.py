@@ -35,7 +35,7 @@ def get_info(tor_file_path):
 conn = sqlite3.connect(db_path)
 conn.text_factory = str
 c = conn.cursor()
-c.execute('''CREATE TABLE if not exists torrent (hash, name, magnet, info)''')
+c.execute('''CREATE TABLE IF NOT EXISTS `torrent` (`hash` VARCHAR(40) NOT NULL, `name` TEXT NOT NULL, `magnet` TEXT NOT NULL, `info` TEXT NOT NULL, PRIMARY KEY(`hash`))''')
 conn.commit()
 for tor_file in os.listdir(tor_path):
     if not tor_file.endswith('.torrent'):
