@@ -37,14 +37,14 @@ class TorHandler(FileSystemEventHandler):
         if not new_tor_name.endswith('.torrent'):
             return
         new_tor_hash = new_tor_name.split(".")[0]
-        conn = sqlite3.connect(db_path)
-        conn.text_factory = str
-        c = conn.cursor()
         new_tor_magnet = get_magnet(event.src_path)
         if not new_tor_magnet.startswith('magnet'):
             return
         new_tor_name = get_name(event.src_path)
         new_tor_info = get_info(event.src_path)
+        conn = sqlite3.connect(db_path)
+        conn.text_factory = str
+        c = conn.cursor()
         c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
                     (new_tor_hash, new_tor_name, new_tor_magnet, new_tor_info))
         conn.commit()
