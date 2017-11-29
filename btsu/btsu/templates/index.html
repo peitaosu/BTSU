@@ -4,12 +4,16 @@
 	<title>BTSU Torrents</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	{% load static %}
-	<link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
+	<link rel="stylesheet" type="text/css" href={% static "site.min.css" %}/>
+	<link rel="stylesheet" type="text/css" href={% static "bootflat.min.css" %}/>
 </head>
 
 <body>
 	{% include "header.html" %}
-	<p id="total">Total Torrents: {{ total }}</p>
+	
+	<div class="col-md-12">
+    	<h4 id="total">Total Torrents: {{ total }}</h4>
+	</div>
 </body>
 
 </html>

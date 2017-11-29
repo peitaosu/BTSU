@@ -1,5 +1,13 @@
-<h1><a href="/">BTSU Torrents</a></h1>
-<form id="search" action="/search" method="get">
-    <input type="text" name="s" placeholder="Keyword" />
-    <input type="submit" value="Search" />
-</form>
+<div class="row">
+    <div class="col-md-12">
+        <h1><a href="/">BTSU Torrents</a></h1>
+    </div>
+        <div class="col-md-12">
+        <form class="input-group form-search" id="search" action="/search" method="get">
+            <input class="form-control search-query" type="text" name="s" placeholder="Keyword" />
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit" data-type="last">Search</button>
+            </span>
+        </form>
+    </div>
+</div>

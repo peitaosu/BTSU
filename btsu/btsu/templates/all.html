@@ -4,18 +4,25 @@
 	<title>BTSU Torrents</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	{% load static %}
-	<link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
+	<link rel="stylesheet" type="text/css" href={% static "site.min.css" %}/>
+	<link rel="stylesheet" type="text/css" href={% static "bootflat.min.css" %}/>
 </head>
 
 <body>
 	{% include "header.html" %}
-	<table class="dataintable">
-		{% for i in list %}
-		<tr>
-			<td><a href="/list?q={{ i }}">{{ i }}</a></td>
-		</tr>
-		{% endfor %}
-	</table>
+	<div class="row">
+		<div class="col-md-12">
+			<table class="table">
+				<tbody>
+					{% for i in list %}
+					<tr>
+						<td><a href="/list?q={{ i }}">{{ i }}</a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 
 </html>
