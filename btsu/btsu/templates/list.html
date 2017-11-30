@@ -1,35 +1,36 @@
 <html>
+	<head>
+		<title>BTSU Torrents</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		{% load static %}
+		<script type="text/javascript" src={% static "site.min.js" %}></script>
+		<link rel="stylesheet" type="text/css" href={% static "site.min.css" %}/>
+		<link rel="stylesheet" type="text/css" href={% static "bootflat.min.css" %}/>
+	</head>
 
-<head>
-	<title>BTSU Torrents</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	{% load static %}
-	<link rel="stylesheet" type="text/css" href={% static "site.min.css" %}/>
-	<link rel="stylesheet" type="text/css" href={% static "bootflat.min.css" %}/>
-</head>
-
-<body>
-	{% include "header.html" %}
-	<div class="col-md-12">
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Information</th>
-					<th>Magnet</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for tor in query_result %}
-				<tr>
-					<td>{{ tor.1 }}</td>
-					<td><a href="/tor?hash={{ tor.0 }}">Information</a></td>
-					<td><a href="{{ tor.2 }}">Magnet</a></td>
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
-</body>
-
+	<body>
+		<div class="container">
+			{% include "header.html" %}
+			<div class="col-md-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Information</th>
+							<th>Magnet</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for tor in query_result %}
+						<tr>
+							<td>{{ tor.1 }}</td>
+							<td><a href="/tor?hash={{ tor.0 }}">Information</a></td>
+							<td><a href="{{ tor.2 }}">Magnet</a></td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
 </html>
