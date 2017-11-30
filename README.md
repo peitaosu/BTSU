@@ -54,19 +54,25 @@ All torrent files which get from DHT Network will be saved in `p2pspider/torrent
 
 ## Step3: Setup your BTSU
 
-BTSU is a django project, please install Django and update the `{your_code_path}` in `btsu/btsu/view.py` before you run the server.
+BTSU is a django project, please:
 
-```
-pip install Django
+1. install Django
 
-# or install from requirements.txt
+    ```
+    pip install Django
 
-pip install -r requirements.txt
+    # or install from requirements.txt
 
-# python {your_code_path}/btsu/manage.py runserver 0.0.0.0:{your_port}
+    pip install -r requirements.txt
+    ```
 
-python btsu/btsu/manage.py runserver 0.0.0.0:1234
-```
+2. update the `TOR_DB_PATH` and add your server ip into `ALLOWED_HOSTS` in `btsu/btsu/settings.py` before you run the server.
+
+    ```
+    # python {your_code_path}/btsu/manage.py runserver 0.0.0.0:{your_port}
+
+    python btsu/btsu/manage.py runserver 0.0.0.0:1234
+    ```
 
 ## Step4: Keep BTSU Running
 
