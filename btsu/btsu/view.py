@@ -83,6 +83,8 @@ def search(request):
                   request.GET['s'] + "%'")
         context['search_result'] = []
         for row in c.fetchall():
+            if len(row[1]) > 80:
+                row = (row[0], row[1][0:77] + '...', row[2], row[3])
             context['search_result'].append(row)
         context['search_count'] = len(context['search_result'])
         return render(request, 'search.html', context)
