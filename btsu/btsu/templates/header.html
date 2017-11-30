@@ -3,14 +3,14 @@
         <h1><a href="/">BTSU Torrents</a></h1>
     </div>
         <div class="col-md-12">
-        <div class="alert alert-warning alert-dismissable">
+        <div class="alert alert-warning alert-dismissable" id="search_warning">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
             <strong>Warning!</strong> Search from more than 2 million torrents may take a long time.
         </div>
         <form class="input-group form-search" id="search" action="/search" method="get">
             <input class="form-control search-query" type="text" name="s" placeholder="Keyword" />
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="submit" data-type="last">Search</button>
+                <button class="btn btn-primary" type="submit" data-type="last" id="search_btn">Search</button>
             </span>
         </form>
     </div>
