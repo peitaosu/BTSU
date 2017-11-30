@@ -21,6 +21,9 @@ Online Demo: [BTSU Torrents](http://128.199.136.19:1234/)
     ```
     cd p2pspider
     npm install -g
+
+    # if encountered error - Cannot find module, please use:
+    npm install
     ```
 
 3. Install pm2 and run index.js with pm2 cluster mode
