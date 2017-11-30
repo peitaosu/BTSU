@@ -122,3 +122,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "btsu/templates")]
+
+TOR_DB_PATH = ''

@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.conf import settings
 import os
 import sys
 import subprocess
@@ -10,8 +11,6 @@ import sqlite3
 
 mimetypes.init()
 
-# tor_store_path = r'{your_code_path}/p2pspider/torrents'
-tor_database_path = r'{your_code_path}/btsu/btsu/torrents.db'
 
 
 def response_console_output(func):
@@ -36,7 +35,7 @@ def get_console_output(command):
 def tor(request):
     request.encoding = 'utf-8'
     if 'hash' in request.GET:
-        conn = sqlite3.connect(tor_database_path)
+        conn = sqlite3.connect(settings.TOR_DB_PATH)
         c = conn.cursor()
         c.execute("SELECT info FROM torrent WHERE hash = '" +
                   request.GET['hash'] + "'")
@@ -48,7 +47,7 @@ def list(request):
     context = {}
     request.encoding = 'utf-8'
     if 'q' in request.GET:
-        conn = sqlite3.connect(tor_database_path)
+        conn = sqlite3.connect(settings.TOR_DB_PATH)
         c = conn.cursor()
         c.execute("SELECT * FROM torrent WHERE hash LIKE '" +
                   request.GET['q'] + "%'")
@@ -60,7 +59,7 @@ def list(request):
 
 def index(request):
     context = {}
-    conn = sqlite3.connect(tor_database_path)
+    conn = sqlite3.connect(settings.TOR_DB_PATH)
     c = conn.cursor()
     c.execute("SELECT MAX(_ROWID_) FROM torrent LIMIT 1")
     context['total'] = c.fetchone()[0]
@@ -78,7 +77,7 @@ def all(request):
 def search(request):
     context = {}
     if 's' in request.GET:
-        conn = sqlite3.connect(tor_database_path)
+        conn = sqlite3.connect(settings.TOR_DB_PATH)
         c = conn.cursor()
         c.execute("SELECT * FROM torrent WHERE name LIKE '%" +
                   request.GET['s'] + "%'")
