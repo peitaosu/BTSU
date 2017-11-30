@@ -1,3 +1,6 @@
+body{
+    background-color: rgb(241, 242, 246);
+}
 tbody tr td{
     font-family: Consolas, 'Courier New', Courier, 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif!important;
 }
