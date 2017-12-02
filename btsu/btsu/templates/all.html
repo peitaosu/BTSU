@@ -1,22 +1,27 @@
 <html>
-	{% include "head.html" %}
-	<body>
-		<div class="container">
-			{% include "header.html" %}
-			<div class="row">
-				<div class="col-md-12">
-					<table class="table">
-						<tbody>
-							{% for i in list %}
-							<tr>
-								<td><a href="/list?q={{ i }}">{{ i }}</a></td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-			</div>
-			{% include "footer.html" %}
-		</div>
-	</body>
+    {% include "head.html" %}
+    <body>
+        <div class="container">
+            {% include "header.html" %}
+            {% if in_maintenance == False %}
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <tbody>
+                            {% for i in list %}
+                            <tr>
+                                <td><a href="/list?q={{ i }}">{{ i }}</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% else %}
+                {% include "maintenance.html" %}
+            {% endif %}
+
+            {% include "footer.html" %}
+        </div>
+    </body>
 </html>

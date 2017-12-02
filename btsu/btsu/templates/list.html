@@ -1,29 +1,34 @@
 <html>
-	{% include "head.html" %}
-	<body>
-		<div class="container">
-			{% include "header.html" %}
-			<div class="col-md-12">
-				<table class="table">
-					<thead>
-						<tr>
-							<th>Name</th>
-							<th>Information</th>
-							<th>Magnet</th>
-						</tr>
-					</thead>
-					<tbody>
-						{% for tor in query_result %}
-						<tr>
-							<td>{{ tor.1 }}</td>
-							<td><a href="/tor?hash={{ tor.0 }}">Information</a></td>
-							<td><a href="{{ tor.2 }}">Magnet</a></td>
-						</tr>
-						{% endfor %}
-					</tbody>
-				</table>
-			</div>
-			{% include "footer.html" %}
-		</div>
-	</body>
+    {% include "head.html" %}
+    <body>
+        <div class="container">
+            {% include "header.html" %}
+
+            {% if in_maintenance == False %}
+            <div class="col-md-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Information</th>
+                            <th>Magnet</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for tor in query_result %}
+                        <tr>
+                            <td>{{ tor.1 }}</td>
+                            <td><a href="/tor?hash={{ tor.0 }}">Information</a></td>
+                            <td><a href="{{ tor.2 }}">Magnet</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+                {% include "maintenance.html" %}
+            {% endif %}
+            {% include "footer.html" %}
+        </div>
+    </body>
 </html>

@@ -50,11 +50,15 @@ def list(request):
     if 'q' in request.GET:
         conn = sqlite3.connect(settings.TOR_DB_PATH)
         c = conn.cursor()
-        c.execute("SELECT * FROM torrent WHERE hash LIKE '" +
-                  request.GET['q'] + "%'")
-        context['query_result'] = []
-        for row in c.fetchall():
-            context['query_result'].append(row)
+        try:
+            c.execute("SELECT * FROM torrent WHERE hash LIKE '" +
+                    request.GET['q'] + "%'")
+            context['query_result'] = []
+            for row in c.fetchall():
+                context['query_result'].append(row)
+            context['in_maintenance'] = False
+        except OperationalError:
+            context['in_maintenance'] = True
         return render(request, 'list.html', context)
 
 
@@ -84,12 +88,16 @@ def search(request):
     if 's' in request.GET:
         conn = sqlite3.connect(settings.TOR_DB_PATH)
         c = conn.cursor()
-        c.execute("SELECT * FROM torrent WHERE name LIKE '%" +
-                  request.GET['s'] + "%'")
-        context['search_result'] = []
-        for row in c.fetchall():
-            if len(row[1]) > 80:
-                row = (row[0], row[1][0:77] + '...', row[2], row[3])
-            context['search_result'].append(row)
-        context['search_count'] = len(context['search_result'])
+        try:
+            c.execute("SELECT * FROM torrent WHERE name LIKE '%" +
+                    request.GET['s'] + "%'")
+            context['search_result'] = []
+            for row in c.fetchall():
+                if len(row[1]) > 80:
+                    row = (row[0], row[1][0:77] + '...', row[2], row[3])
+                context['search_result'].append(row)
+            context['search_count'] = len(context['search_result'])
+            context['in_maintenance'] = False
+        except OperationalError:
+            context['in_maintenance'] = True
         return render(request, 'search.html', context)
