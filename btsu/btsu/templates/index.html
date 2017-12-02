@@ -1,14 +1,21 @@
 <html>
-	{% include "head.html" %}
-	<body>
-		<div class="container">
-			{% include "header.html" %}
-			
-			<div class="col-md-12">
-				<h4 id="total">Total Torrents: {{ total }}</h4>
-			</div>
+    {% include "head.html" %}
+    <body>
+        <div class="container">
+            {% include "header.html" %}
+            
+            {% if in_maintenance == False %}
+            <div class="col-md-12">
+                <h4 id="total">Total Torrents: {{ total }}</h4>
+            </div>
+            {% else %}
+            <div class="alert alert-danger">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+              <strong>Sorry!</strong> BTSU Torrents in maintenance.
+            </div>
+            {% endif %}
 
-			{% include "footer.html" %}
-		</div>
-	</body>
+            {% include "footer.html" %}
+        </div>
+    </body>
 </html>

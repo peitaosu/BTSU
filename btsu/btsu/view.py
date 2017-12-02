@@ -8,6 +8,7 @@ import json
 import StringIO
 import mimetypes
 import sqlite3
+from sqlite3 import OperationalError
 
 mimetypes.init()
 
@@ -61,8 +62,12 @@ def index(request):
     context = {}
     conn = sqlite3.connect(settings.TOR_DB_PATH)
     c = conn.cursor()
-    c.execute("SELECT MAX(_ROWID_) FROM torrent LIMIT 1")
-    context['total'] = c.fetchone()[0]
+    try:
+        c.execute("SELECT MAX(_ROWID_) FROM torrent LIMIT 1")
+        context['total'] = c.fetchone()[0]
+        context['in_maintenance'] = False
+    except OperationalError:
+        context['in_maintenance'] = True
     return render(request, 'index.html', context)
 
 
