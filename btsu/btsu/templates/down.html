@@ -9,9 +9,9 @@
         <div class="row">
             <div class="col-md-12">
             <form class="input-group">
-                <input class="form-control" name="torrentId" , placeholder="magnet:?xt=urn:btih:{{ hash }}" value="magnet:?xt=urn:btih:{{ hash }}">
+                <input class="form-control" name="torrentId" placeholder="magnet:?xt=urn:btih:" value="magnet:?xt=urn:btih:{{ hash }}">
                 <span class="input-group-btn">
-                    <button class="btn btn-primary" type="submit">Download</button>
+                    <button class="btn btn-primary" type="submit" onclick="download(event)">Download</button>
                 </span>    
             </form>
         </div>
@@ -23,13 +23,12 @@
                 console.error('ERROR: ' + err.message)
             })
 
-            document.querySelector('form').addEventListener('submit', function (e) {
+            var download = function(e) {
                 e.preventDefault()
-
                 var torrentId = document.querySelector('form input[name=torrentId]').value
                 console.log('Adding ' + torrentId)
                 client.add(torrentId, onTorrent)
-            })
+            }
 
             function onTorrent(torrent) {
                 console.log('Got torrent metadata!')

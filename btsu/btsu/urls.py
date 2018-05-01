@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^list', view.list),
     url(r'^search', view.search),
     url(r'^all', view.all),
-    url(r'^down', view.download)
+    url(r'^download', view.download)
 ]
