@@ -101,3 +101,9 @@ def search(request):
         except OperationalError:
             context['in_maintenance'] = True
         return render(request, 'search.html', context)
+
+def download(request):
+    context = {}
+    if 'hash' in request.GET:
+        context['hash'] = request.GET['hash']
+        return render(request, 'down.html', context)
