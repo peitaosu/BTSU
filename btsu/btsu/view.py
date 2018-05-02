@@ -108,3 +108,8 @@ def download(request):
     if 'hash' in request.GET:
         context['hash'] = request.GET['hash']
     return render(request, 'down.html', context)
+
+def play(request):
+    context = {}
+    context['in_maintenance'] = False
+    return render(request, 'play.html', context)
