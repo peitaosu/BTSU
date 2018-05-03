@@ -102,7 +102,7 @@ def search(request):
             context['in_maintenance'] = True
         return render(request, 'search.html', context)
 
-def download(request):
+def down(request):
     context = {}
     context['in_maintenance'] = False
     if 'hash' in request.GET:
