@@ -1,0 +1,45 @@
+<script src="https://cdn.jsdelivr.net/webtorrent/latest/webtorrent.min.js"></script>
+<script>
+    var client = new WebTorrent()
+
+    client.on('error', function (err) {
+        console.error('ERROR: ' + err.message)
+    })
+
+    var download = function(e) {
+        e.preventDefault()
+        var torrentId = document.querySelector('form input[name=torrentId]').value
+        console.log('Adding ' + torrentId)
+        client.add(torrentId, onTorrent)
+    }
+
+    function onTorrent(torrent) {
+        console.log('Got torrent metadata!')
+        console.log('Torrent Info Hash: ' + torrent.infoHash)
+        console.log('Torrent Magnet URI: ' + torrent.magnetURI)
+        console.log('Torrent File Blob URL: ' + torrent.torrentFileBlobURL)
+        console.log('Torrent Name: ' + torrent.name)
+
+        // Print out progress every 5 seconds
+        var interval = setInterval(function () {
+            console.log('Progress: ' + (torrent.progress * 100).toFixed(1) + '%')
+        }, 5000)
+
+        torrent.on('done', function () {
+            console.log('Progress: 100%')
+            clearInterval(interval)
+        })
+
+        // Render all files into to the page
+        torrent.files.forEach(function (file) {
+            file.appendTo('.log')
+            console.log('(Blob URLs only work if the file is loaded from a server. "http//localhost" works. "file://" does not.)')
+            file.getBlobURL(function (err, url) {
+                if (err) return console.log(err.message)
+                console.log('Done.')
+                console.log('File Url: ' + url)
+                console.log('File Name: ' + file.name)
+            })
+        })
+    }
+</Script>
