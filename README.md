@@ -6,6 +6,8 @@
 
 BTSU is a torrent website project, powered by [p2pspider](https://github.com/fanpei91/p2pspider.git) and django.
 
+Online Demo: [BTSU Torrents](http://btsu.mitgai.net/)
+
 ## Step1: Get Torrents from DHT Network
 
 1. Install Node.js
