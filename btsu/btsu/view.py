@@ -112,4 +112,6 @@ def down(request):
 def play(request):
     context = {}
     context['in_maintenance'] = False
+    if 'hash' in request.GET:
+        context['hash'] = request.GET['hash']
     return render(request, 'play.html', context)
