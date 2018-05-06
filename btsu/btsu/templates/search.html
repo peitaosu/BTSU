@@ -13,6 +13,7 @@
                                 <th>Name</th>
                                 <th>Information</th>
                                 <th>Magnet</th>
+                                <th>Play</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -21,6 +22,7 @@
                                 <td>{{ tor.1 }}</td>
                                 <td><a href="/tor?hash={{ tor.0 }}">Information</a></td>
                                 <td><a href="{{ tor.2 }}">Magnet</a></td>
+                                <td><a href="/play?hash={{ tor.0 }}">Play</a></td>
                             </tr>
                             {% endfor %}
                         </tbody>
