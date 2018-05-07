@@ -102,13 +102,6 @@ def search(request):
             context['in_maintenance'] = True
         return render(request, 'search.html', context)
 
-def down(request):
-    context = {}
-    context['in_maintenance'] = False
-    if 'hash' in request.GET:
-        context['hash'] = request.GET['hash']
-    return render(request, 'down.html', context)
-
 def play(request):
     context = {}
     context['in_maintenance'] = False
