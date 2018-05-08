@@ -104,7 +104,13 @@ def search(request):
 
 def play(request):
     context = {}
-    context['in_maintenance'] = False
+    conn = sqlite3.connect(settings.TOR_DB_PATH)
+    c = conn.cursor()
+    try:
+        c.execute("SELECT MAX(_ROWID_) FROM torrent LIMIT 1")
+        context['in_maintenance'] = False
+    except OperationalError:
+        context['in_maintenance'] = True
     if 'hash' in request.GET:
         context['hash'] = request.GET['hash']
     return render(request, 'play.html', context)
