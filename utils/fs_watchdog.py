@@ -8,7 +8,7 @@ from watchdog.events import FileSystemEventHandler
 
 watch_path = sys.argv[1]
 db_path = sys.argv[2]
-
+tors = []
 
 def get_name(tor_file_path):
     cmd = ['transmission-show ' + tor_file_path]
@@ -30,6 +30,15 @@ def get_info(tor_file_path):
         cmd, stdout=subprocess.PIPE, shell=True).communicate()[0]
     return '\n'.join(output.split('\n')[3:])
 
+def write_db():
+    conn = sqlite3.connect(db_path)
+    conn.text_factory = str
+    c = conn.cursor()
+    for tor in tors:
+        c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
+                    (tor['hash'], tor['name'], tor['magnet'], tor['info']))
+    conn.commit()
+
 
 class TorHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -42,13 +51,14 @@ class TorHandler(FileSystemEventHandler):
             return
         new_tor_name = get_name(event.src_path)
         new_tor_info = get_info(event.src_path)
-        conn = sqlite3.connect(db_path)
-        conn.text_factory = str
-        c = conn.cursor()
-        c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
-                    (new_tor_hash, new_tor_name, new_tor_magnet, new_tor_info))
-        conn.commit()
-
+        tors.append(
+            {
+                "hash": new_tor_hash,
+                "name": new_tor_name,
+                "magnet": new_tor_magnet,
+                "info": new_tor_info
+            }
+        )
 
 if __name__ == "__main__":
     event_handler = TorHandler()
@@ -61,4 +71,7 @@ if __name__ == "__main__":
             time.sleep(1)
     except KeyboardInterrupt:
         ob.stop()
+        write_db()
+    except:
+        write_db()
     ob.join()
