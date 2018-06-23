@@ -35,8 +35,9 @@ def write_db():
     conn.text_factory = str
     c = conn.cursor()
     for tor in tors:
-        c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''',
-                    (tor['hash'], tor['name'], tor['magnet'], tor['info']))
+        c.execute("SELECT hash FROM torrent WHERE hash = '" + tor['hash'] + "'")
+        if len(c.fetchall()) > 0:
+            c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''', (tor['hash'], tor['name'], tor['magnet'], tor['info']))
     conn.commit()
 
 
