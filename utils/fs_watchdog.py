@@ -35,10 +35,9 @@ def write_db():
     conn.text_factory = str
     c = conn.cursor()
     for tor in tors:
-        c.execute("SELECT hash FROM torrent WHERE hash = '" + tor['hash'] + "'")
-        if len(c.fetchall()) > 0:
-            c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''', (tor['hash'], tor['name'], tor['magnet'], tor['info']))
+        c.execute('''INSERT OR IGNORE INTO torrent(hash, name, magnet, info) VALUES (?, ?, ?, ?);''', (tor['hash'], tor['name'], tor['magnet'], tor['info']))
     conn.commit()
+    conn.close()
 
 
 class TorHandler(FileSystemEventHandler):
@@ -70,9 +69,7 @@ if __name__ == "__main__":
     try:
         while True:
             time.sleep(1)
-    except KeyboardInterrupt:
+    finally:
         ob.stop()
-        write_db()
-    except:
         write_db()
     ob.join()
