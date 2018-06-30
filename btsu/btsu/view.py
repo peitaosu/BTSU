@@ -104,12 +104,19 @@ def search(request):
 
 def down(request):
     context= {}
-    if settings.TRANSMISSION_USER == '' or settings.TRANSMISSION_PWD == '':
-        pass
-    command = 'transmission-remote -a "magnet:?xt=urn:btih:{}" -n "{}:{}"'.format(request.GET['hash'], settings.TRANSMISSION_USER, settings.TRANSMISSION_PWD)
-    if 'success' in subprocess.Popen(command, stdout=subprocess.PIPE, shell=True).communicate()[0]:
-        pass
-    index(request)
+    if settings.TRANSMISSION_USER == '' or settings.TRANSMISSION_PWD == '' or settings.TRANSMISSION_WEB == '':
+        context['not_set'] = True
+    else: 
+        context['hash'] = request.GET['hash']
+        context['webui'] = settings.TRANSMISSION_WEB
+        command = 'transmission-remote -a "magnet:?xt=urn:btih:{}" -n "{}:{}"'.format(context['hash'], settings.TRANSMISSION_USER, settings.TRANSMISSION_PWD)
+        result = subprocess.Popen(command, stdout=subprocess.PIPE, shell=True).communicate()[0]
+        if "success" in result:
+            context['add_success'] = True
+        else:
+            context['add_success'] = False
+            context['error'] = result
+    return render(request, 'down.html', context)
 
 def play(request):
     context = {}
