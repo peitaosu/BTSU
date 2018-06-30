@@ -102,6 +102,15 @@ def search(request):
             context['in_maintenance'] = True
         return render(request, 'search.html', context)
 
+def down(request):
+    context= {}
+    if settings.TRANSMISSION_USER == '' or settings.TRANSMISSION_PWD == '':
+        pass
+    command = 'transmission-remote -a "magnet:?xt=urn:btih:{}" -n "{}:{}"'.format(request.GET['hash'], settings.TRANSMISSION_USER, settings.TRANSMISSION_PWD)
+    if 'success' in subprocess.Popen(command, stdout=subprocess.PIPE, shell=True).communicate()[0]:
+        pass
+    index(request)
+
 def play(request):
     context = {}
     conn = sqlite3.connect(settings.TOR_DB_PATH)

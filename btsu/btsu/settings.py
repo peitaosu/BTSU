@@ -124,3 +124,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "btsu/templates"), os.path.join(BASE_DIR, "btsu/static")]
 
 TOR_DB_PATH = ''
+
+TRANSMISSION_USER = ''
+
+TRANSMISSION_PWD = ''
