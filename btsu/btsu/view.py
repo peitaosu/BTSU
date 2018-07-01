@@ -56,6 +56,8 @@ def list(request):
             context['query_result'] = []
             for row in c.fetchall():
                 context['query_result'].append(row)
+            c.execute("SELECT MAX(_ROWID_) FROM torrent LIMIT 1")
+            context['total'] = c.fetchone()[0]
             context['in_maintenance'] = False
         except OperationalError:
             context['in_maintenance'] = True
@@ -97,6 +99,8 @@ def search(request):
                     row = (row[0], row[1][0:77] + '...', row[2], row[3])
                 context['search_result'].append(row)
             context['search_count'] = len(context['search_result'])
+            c.execute("SELECT MAX(_ROWID_) FROM torrent LIMIT 1")
+            context['total'] = c.fetchone()[0]
             context['in_maintenance'] = False
         except OperationalError:
             context['in_maintenance'] = True
@@ -124,6 +128,7 @@ def play(request):
     c = conn.cursor()
     try:
         c.execute("SELECT MAX(_ROWID_) FROM torrent LIMIT 1")
+        context['total'] = c.fetchone()[0]
         context['in_maintenance'] = False
     except OperationalError:
         context['in_maintenance'] = True
