@@ -52,6 +52,14 @@ All torrent files which get from DHT Network will be saved in `p2pspider/torrent
     python utils/tor2db.py p2pspider/torrents btsu/btsu/torrents.db
     ```
 
+3. If you already have old torrents.db which created in the past, and you want to merge it with your current one
+
+    ```
+    # python utils/mergedb.py <a.db> <b.db>
+
+    python utils/mergedb.py torrents.db old_torrents.db
+    ```
+
 ## Step3: Setup your BTSU
 
 BTSU is a django project, please:
