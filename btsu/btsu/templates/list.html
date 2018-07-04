@@ -13,7 +13,9 @@
                                 <th>Name</th>
                                 <th>Information</th>
                                 <th>Magnet</th>
+                                {% if transmission_set %}
                                 <th>Download</th>
+                                {% endif %}
                             </tr>
                         </thead>
                         <tbody>
@@ -22,7 +24,9 @@
                                 <td>{{ tor.1 }}</td>
                                 <td><a href="/tor?hash={{ tor.0 }}">Information</a></td>
                                 <td><a href="{{ tor.2 }}">Magnet</a></td>
+                                {% if transmission_set %}
                                 <td><a href="/down?hash={{ tor.0 }}">Download</a></td>
+                                {% endif %}
                             </tr>
                             {% endfor %}
                         </tbody>

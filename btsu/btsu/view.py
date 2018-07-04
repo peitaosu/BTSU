@@ -46,6 +46,7 @@ def tor(request):
 
 def list(request):
     context = {}
+    context['transmission_set'] = settings.TRANSMISSION_SET
     request.encoding = 'utf-8'
     if 'q' in request.GET:
         conn = sqlite3.connect(settings.TOR_DB_PATH)
@@ -87,6 +88,7 @@ def all(request):
 
 def search(request):
     context = {}
+    context['transmission_set'] = settings.TRANSMISSION_SET
     if 's' in request.GET:
         conn = sqlite3.connect(settings.TOR_DB_PATH)
         c = conn.cursor()
@@ -108,9 +110,8 @@ def search(request):
 
 def down(request):
     context= {}
-    if settings.TRANSMISSION_USER == '' or settings.TRANSMISSION_PWD == '' or settings.TRANSMISSION_WEB == '':
-        context['not_set'] = True
-    else: 
+    context['transmission_set'] = settings.TRANSMISSION_SET
+    if settings.TRANSMISSION_SET: 
         context['hash'] = request.GET['hash']
         context['webui'] = settings.TRANSMISSION_WEB
         command = 'transmission-remote -a "magnet:?xt=urn:btih:{}" -n "{}:{}"'.format(context['hash'], settings.TRANSMISSION_USER, settings.TRANSMISSION_PWD)
