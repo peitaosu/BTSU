@@ -103,3 +103,9 @@ pip install -r requirements.txt
 
 python fs_watchdog.py <torrent_folder> <database>
 ```
+
+## Step6: Download Magnet through Transmission-Web
+
+Now BTSU support download magnet through transmission-web.
+
+Please setup `TRANSMISSION_USER`, `TRANSMISSION_PWD`, `TRANSMISSION_WEB` and set `TRANSMISSION_SET = True` in `settings.py` then you can add magnet link to your transmission-daemon.
