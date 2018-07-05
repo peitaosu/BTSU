@@ -41,6 +41,7 @@ def tor(request):
         c.execute("SELECT info FROM torrent WHERE hash = '" +
                   request.GET['hash'] + "'")
         tor_info = c.fetchone()[0]
+        conn.close()
         return HttpResponse(['<BR>'.join(tor_info.split('\n'))])
 
 
@@ -62,6 +63,7 @@ def list(request):
             context['in_maintenance'] = False
         except OperationalError:
             context['in_maintenance'] = True
+        conn.close()
         return render(request, 'list.html', context)
 
 
@@ -75,6 +77,7 @@ def index(request):
         context['in_maintenance'] = False
     except OperationalError:
         context['in_maintenance'] = True
+    conn.close()
     return render(request, 'index.html', context)
 
 
@@ -106,6 +109,7 @@ def search(request):
             context['in_maintenance'] = False
         except OperationalError:
             context['in_maintenance'] = True
+        conn.close()
         return render(request, 'search.html', context)
 
 def down(request):
@@ -135,4 +139,5 @@ def play(request):
         context['in_maintenance'] = True
     if 'hash' in request.GET:
         context['hash'] = request.GET['hash']
+    conn.close()
     return render(request, 'play.html', context)
