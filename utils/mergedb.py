@@ -24,6 +24,7 @@ def merge(db_a, db_b):
 if __name__=="__main__":
     if len(sys.argv) < 3:
         print "python mergedb.py <a.db> <b.db>"
-    db_a = sys.argv[1]
-    db_b = sys.argv[2]
-    merge(db_a, db_b)
+    else:
+        db_a = sys.argv[1]
+        db_b = sys.argv[2]
+        merge(db_a, db_b)

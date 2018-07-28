@@ -6,8 +6,6 @@ import subprocess
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-watch_path = sys.argv[1]
-db_path = sys.argv[2]
 tors = []
 
 def get_name(tor_file_path):
@@ -30,7 +28,7 @@ def get_info(tor_file_path):
         cmd, stdout=subprocess.PIPE, shell=True).communicate()[0]
     return '\n'.join(output.split('\n')[3:])
 
-def write_db():
+def write_db(db_path):
     conn = sqlite3.connect(db_path)
     conn.text_factory = str
     c = conn.cursor()
@@ -61,15 +59,20 @@ class TorHandler(FileSystemEventHandler):
         )
 
 if __name__ == "__main__":
-    event_handler = TorHandler()
-    ob = Observer()
-    ob.schedule(event_handler, path=watch_path, recursive=False)
-    ob.start()
+    if len(sys.argv) < 3:
+        print "python fs_watchdog.py <watch_path> <db_path>"
+    else:
+        watch_path = sys.argv[1]
+        db_path = sys.argv[2]
+        event_handler = TorHandler()
+        ob = Observer()
+        ob.schedule(event_handler, path=watch_path, recursive=False)
+        ob.start()
 
-    try:
-        while True:
-            time.sleep(1)
-    finally:
-        ob.stop()
-        write_db()
-    ob.join()
+        try:
+            while True:
+                time.sleep(1)
+        finally:
+            ob.stop()
+            write_db(db_path)
+        ob.join()
